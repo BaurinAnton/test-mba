@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/get-static-props/default",
+      "handler": "get-static-props.default",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/page-journal-articles/:articleSlug",
+      "handler": "get-static-props.getStaticPropsPageJournalArticle",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/page-journal-articles",
+      "handler": "get-static-props.getStaticPropsPageJournalArticles",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/page-promo",
+      "handler": "get-static-props.getStaticPropsPagePromo",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/programs/:type/:program",
+      "handler": "get-static-props.getStaticPropsProgram",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/programs",
+      "handler": "get-static-props.getStaticPropsPrograms",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/teachers/:teacher",
+      "handler": "get-static-props.getStaticPropsTeacher",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/get-static-props/teachers",
+      "handler": "get-static-props.getStaticPropsTeachers",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "journal_articles",
+  "info": {
+    "name": "journalArticle",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "journal_category": {
+      "model": "journal-category",
+      "via": "journal_articles"
+    },
+    "journal_tags": {
+      "collection": "journal-tag",
+      "via": "journal_articles",
+      "dominant": true
+    },
+    "picture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "shortDescription": {
+      "type": "text"
+    },
+    "articleBody": {
+      "type": "dynamiczone",
+      "components": [
+        "journal.paragraph",
+        "journal.title",
+        "general.picture",
+        "journal.emphasis",
+        "journal.quote",
+        "journal.list",
+        "journal.conclusion",
+        "journal.form-pdf-materials",
+        "journal.journal-recommended-articles",
+        "journal.journal-table",
+        "journal.journal-recommended-program",
+        "journal.journal-article-recommended-programs-section"
+      ]
+    },
+    "journal_authors": {
+      "collection": "journal-authors",
+      "via": "journal_articles",
+      "dominant": true
+    },
+    "programs": {
+      "collection": "product",
+      "via": "journal_articles",
+      "dominant": true
+    },
+    "pdfMaterials": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

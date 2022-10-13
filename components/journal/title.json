@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_journal_titles",
+  "info": {
+    "name": "title",
+    "icon": "bone",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "titleBody": {
+      "type": "component",
+      "repeatable": true,
+      "component": "general.title"
+    }
+  }
+}

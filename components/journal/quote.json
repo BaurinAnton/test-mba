@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_journal_quotes",
+  "info": {
+    "name": "quote",
+    "icon": "align-right",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "athorPosition": {
+      "type": "string"
+    },
+    "portrait": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

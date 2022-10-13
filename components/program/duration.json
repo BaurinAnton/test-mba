@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_program_durations",
+  "info": {
+    "name": "duration",
+    "icon": "clock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "studyHours": {
+      "type": "biginteger",
+      "required": false
+    },
+    "minStudyMonths": {
+      "type": "biginteger",
+      "required": false
+    }
+  }
+}

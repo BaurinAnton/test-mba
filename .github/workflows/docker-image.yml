@@ -44,3 +44,4 @@ jobs:
           value: $((${{ secrets.MINOR_VERSION }}+1))
           repository: BaurinAnton/test-mba
           token: ${{ secrets.REPO_ACCESS_TOKEN_VERSION }}
+          

@@ -33,7 +33,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ secrets.MAJOR_VERSION }}.${{ secrets.MINOR_VERSION }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
       -

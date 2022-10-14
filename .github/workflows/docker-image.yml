@@ -33,6 +33,14 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
+      -
+        name: Update Minor version
+        uses: hmanzur/actions-set-secret@v2.0.0
+        with:
+          name: 'MINOR_VERSION'
+          value: $((${{ secrets.MINOR_VERSION }}+1))
+          repository: BaurinAnton/test-mba
+          token: ${{ secrets.REPO_ACCESS_TOKEN_VERSION }}

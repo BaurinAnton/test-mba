@@ -23,6 +23,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       -
+        name: Get Hash
+        id: hash
+        run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
+      - 
+        name: Check Hash
+        run: echo "${{ env.hash }}"
+      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
@@ -33,7 +40,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{GITHUB_SHA::8}}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ env.hash }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
 

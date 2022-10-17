@@ -28,13 +28,13 @@ jobs:
       -
         name: Build and push
         uses: docker/build-push-action@v3
-        with:
-          # context: .
-          # file: ./Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          # tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${env.SHORT_SHA}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
+        # with:
+        #   # context: .
+        #   # file: ./Dockerfile
+        #   builder: ${{ steps.buildx.outputs.name }}
+        #   push: true
+        #   # tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${env.SHORT_SHA}
+        #   cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
+        #   cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${GITHUB_SHA::8}
 

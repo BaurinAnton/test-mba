@@ -28,7 +28,7 @@ jobs:
       -
         name: Add SHORT_SHA env property with commit short sha
         id: tags_custom
-        run: echo "SHORT_SHA=${GITHUB_SHA::8}" >> $GITHUB_ENV
+        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v3
@@ -37,7 +37,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{steps.tags_custom.outputs.SHORT_SHA}}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ steps.tags_custom.outputs.GITHUB_SHA_SHORT }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
 

@@ -1,4 +1,4 @@
-name: CI MBA
+name: api-moscow-mba
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:${{ env.GITHUB_SHA_CUSTOMIZE }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ci-mba:buildcache,mode=max
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/api-moscow-mba:${{ env.GITHUB_SHA_CUSTOMIZE }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/api-moscow-mba:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/api-moscow-mba:buildcache,mode=max
 

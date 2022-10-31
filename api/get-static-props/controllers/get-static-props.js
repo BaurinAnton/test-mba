@@ -130,6 +130,10 @@ module.exports = {
             slug: 1,
             createdAt: 1,
             shortDescription: 1,
+            metaTitle: 1,
+            metaDescription: 1,
+            noindex: 1,
+            nofollow: 1,
             picture: 1,
             pdfMaterials: 1,
             journal_category: 1,
@@ -202,6 +206,10 @@ module.exports = {
         slug: journalArticle.slug || null,
         shortDescription: journalArticle.shortDescription || null,
         createdAt: journalArticle.createdAt || null,
+        metaTitle: journalArticle.metaTitle || null,
+        metaDescription: journalArticle.metaDescription || null,
+        noindex: journalArticle.noindex || null,
+        nofollow: journalArticle.nofollow || null,
         picture: {
           url: journalArticle.picture?.url || null,
           width: journalArticle.picture?.width || null,
@@ -696,6 +704,10 @@ module.exports = {
             id: 1,
             title: 1,
             slug: 1,
+            metaTitle: 1,
+            metaDescription: 1,
+            noindex: 1,
+            nofollow: 1,
             studyFormat: 1,
             category: 1,
             study_field: 1,
@@ -758,6 +770,10 @@ module.exports = {
             id: program.id || null,
             title: program.title || null,
             slug: program.slug || null,
+            metaTitle: program.metaTitle || null,
+            metaDescription: program.metaDescription || null,
+            noindex: program.noindex || null,
+            nofollow: program.nofollow || null,
             studyFormat: program.studyFormat || null,
             category: {
               type: program.category?.type || null,
@@ -1059,6 +1075,153 @@ module.exports = {
     } catch (err) {
       console.log(err)
       return { programs: null, teachers: null }
+    }
+  },
+  defaultMskAcademy: async ctx => {
+    const typeSlug = ctx?.request?.url?.split('/')?.[3] || 'mini'
+    // const programSlug = ctx?.request?.url?.split('/')?.[4] || ''
+
+    try {
+      const programs = await strapi
+        .query('product')
+        .model.find(
+          { published_at: { $ne: null } },
+          {
+            id: 1,
+            title: 1,
+            slug: 1,
+            category: 1,
+            duration: 1,
+            whatWillYouLearn: 1
+          }
+        )
+        .populate([
+          { path: 'category', select: 'type slug' },
+          { path: 'duration', select: 'minStudyMonths' },
+          { path: 'whatWillYouLearn', select: 'string' }
+        ])
+
+      const programsFiltered =
+        programs
+          ?.filter(program => program && program?.category?.type === typeSlug)
+          ?.map(program => ({
+            id: program.id || null,
+            title: program.title || null,
+            slug: program.slug || null,
+            duration: {
+              minStudyMonths:
+                Number(program.duration?.[0]?.ref?.minStudyMonths) || null
+            },
+            whatWillYouLearn: program.whatWillYouLearn?.map(item => ({
+              string: item?.ref?.string || null
+            }))
+          })) || []
+
+      return { programs: programsFiltered }
+    } catch (err) {
+      console.log(err)
+      return { programs: null }
+    }
+  },
+  programMskAcademy: async ctx => {
+    const typeSlug = ctx?.request?.url?.split('/')?.[3] || 'mini'
+    const programSlug = ctx?.request?.url?.split('/')?.[4] || ''
+
+    try {
+      const programsProgram = await strapi
+        .query('product')
+        .model.find(
+          {
+            published_at: { $ne: null },
+            slug: programSlug
+          },
+          {
+            id: 1,
+            title: 1,
+            slug: 1,
+            category: 1,
+            duration: 1,
+            whatWillYouLearn: 1,
+            picture: 1,
+            price: 1,
+            whoIsFor: 1,
+            baseSubjects: 1,
+            specializedSubjects: 1,
+            teachers: 1
+          }
+        )
+        .populate([
+          { path: 'category', select: 'type slug' },
+          { path: 'picture', select: 'url width height alternativeText' },
+          { path: 'whatWillYouLearn', select: 'string' },
+          { path: 'specializedSubjects', select: 'string title' },
+          { path: 'duration', select: 'minStudyMonths' },
+          { path: 'baseSubjects', select: 'string title' },
+          { path: 'whoIsFor', select: 'name description' },
+          {
+            path: 'teachers',
+            select: 'name description slug portrait descriptionItems'
+          }
+        ])
+
+      const programFiltered =
+        programsProgram
+          .filter(program => program?.category?.type === typeSlug)
+          ?.map(program => ({
+            id: program.id || null,
+            title: program.title || null,
+            slug: program.slug || null,
+            price: program.price || null,
+            duration: {
+              minStudyMonths: program.duration?.[0]?.ref?.minStudyMonths || null
+            },
+            whatWillYouLearn:
+              program.whatWillYouLearn?.map(item => ({
+                string: item?.ref?.string || null
+              })) || null,
+            picture: {
+              url: program.picture?.url || null,
+              width: program.picture?.width || null,
+              height: program.picture?.height || null,
+              alternativeText: program.picture?.alternativeText || null
+            },
+            specializedSubjects:
+              program.specializedSubjects?.map(subject => ({
+                string: subject?.ref?.string || null,
+                title: subject?.ref?.title || null
+              })) || null,
+            baseSubjects:
+              program.baseSubjects?.map(subject => ({
+                string: subject?.ref?.string || null,
+                title: subject?.ref?.title || null
+              })) || null,
+            whoIsFor:
+              program.whoIsFor?.map(item => ({
+                name: item?.ref?.name || null,
+                description: item?.ref?.description || null
+              })) || null,
+            teachers:
+              program.teachers?.map(teacher => ({
+                name: teacher?.name,
+                description: teacher?.description,
+                slug: teacher?.slug,
+                portrait: {
+                  url: teacher?.portrait?.url || null,
+                  width: teacher?.portrait?.width || null,
+                  height: teacher?.portrait?.height || null,
+                  alternativeText: teacher?.portrait?.alternativeText || null
+                },
+                descriptionItems:
+                  teacher?.descriptionItems?.map(item => ({
+                    item: item?.ref?.item || null
+                  })) || null
+              })) || null
+          })) || null
+
+      return { programs: programFiltered }
+    } catch (err) {
+      console.log(err)
+      return { programs: null }
     }
   }
 }

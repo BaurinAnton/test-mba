@@ -1,0 +1,3056 @@
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type Category {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  type: String!
+  slug: String
+  copyToKk: Boolean
+  labelCases: ComponentGeneralWordCases
+  description: String!
+  locale: String
+  published_at: DateTime
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Category]
+}
+
+type CategoryConnection {
+  values: [Category]
+  groupBy: CategoryGroupBy
+  aggregate: CategoryAggregator
+}
+
+type CategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CategoryGroupBy {
+  id: [CategoryConnectionId]
+  _id: [CategoryConnection_id]
+  createdAt: [CategoryConnectionCreatedAt]
+  updatedAt: [CategoryConnectionUpdatedAt]
+  type: [CategoryConnectionType]
+  slug: [CategoryConnectionSlug]
+  copyToKk: [CategoryConnectionCopyToKk]
+  labelCases: [CategoryConnectionLabelCases]
+  description: [CategoryConnectionDescription]
+  locale: [CategoryConnectionLocale]
+  published_at: [CategoryConnectionPublished_at]
+}
+
+type CategoryConnectionId {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnection_id {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionCreatedAt {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionUpdatedAt {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionType {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionSlug {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionCopyToKk {
+  key: Boolean
+  connection: CategoryConnection
+}
+
+type CategoryConnectionLabelCases {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionDescription {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionLocale {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionPublished_at {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+input CategoryInput {
+  type: String!
+  slug: String
+  copyToKk: Boolean
+  labelCases: ComponentGeneralWordCaseInput!
+  description: String!
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCategoryInput {
+  type: String
+  slug: String
+  copyToKk: Boolean
+  labelCases: editComponentGeneralWordCaseInput
+  description: String
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCategoryInput {
+  data: CategoryInput
+}
+
+type createCategoryPayload {
+  category: Category
+}
+
+input updateCategoryInput {
+  where: InputID
+  data: editCategoryInput
+}
+
+type updateCategoryPayload {
+  category: Category
+}
+
+input deleteCategoryInput {
+  where: InputID
+}
+
+type deleteCategoryPayload {
+  category: Category
+}
+
+type GetStaticPaths {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  path: String
+  published_at: DateTime
+}
+
+type GetStaticPathsConnection {
+  values: [GetStaticPaths]
+  groupBy: GetStaticPathsGroupBy
+  aggregate: GetStaticPathsAggregator
+}
+
+type GetStaticPathsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GetStaticPathsGroupBy {
+  id: [GetStaticPathsConnectionId]
+  _id: [GetStaticPathsConnection_id]
+  createdAt: [GetStaticPathsConnectionCreatedAt]
+  updatedAt: [GetStaticPathsConnectionUpdatedAt]
+  path: [GetStaticPathsConnectionPath]
+  published_at: [GetStaticPathsConnectionPublished_at]
+}
+
+type GetStaticPathsConnectionId {
+  key: ID
+  connection: GetStaticPathsConnection
+}
+
+type GetStaticPathsConnection_id {
+  key: ID
+  connection: GetStaticPathsConnection
+}
+
+type GetStaticPathsConnectionCreatedAt {
+  key: DateTime
+  connection: GetStaticPathsConnection
+}
+
+type GetStaticPathsConnectionUpdatedAt {
+  key: DateTime
+  connection: GetStaticPathsConnection
+}
+
+type GetStaticPathsConnectionPath {
+  key: String
+  connection: GetStaticPathsConnection
+}
+
+type GetStaticPathsConnectionPublished_at {
+  key: DateTime
+  connection: GetStaticPathsConnection
+}
+
+input GetStaticPathInput {
+  path: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editGetStaticPathInput {
+  path: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createGetStaticPathInput {
+  data: GetStaticPathInput
+}
+
+type createGetStaticPathPayload {
+  getStaticPath: GetStaticPaths
+}
+
+input updateGetStaticPathInput {
+  where: InputID
+  data: editGetStaticPathInput
+}
+
+type updateGetStaticPathPayload {
+  getStaticPath: GetStaticPaths
+}
+
+input deleteGetStaticPathInput {
+  where: InputID
+}
+
+type deleteGetStaticPathPayload {
+  getStaticPath: GetStaticPaths
+}
+
+type GetStaticProps {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  published_at: DateTime
+}
+
+type GetStaticPropsConnection {
+  values: [GetStaticProps]
+  groupBy: GetStaticPropsGroupBy
+  aggregate: GetStaticPropsAggregator
+}
+
+type GetStaticPropsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GetStaticPropsGroupBy {
+  id: [GetStaticPropsConnectionId]
+  _id: [GetStaticPropsConnection_id]
+  createdAt: [GetStaticPropsConnectionCreatedAt]
+  updatedAt: [GetStaticPropsConnectionUpdatedAt]
+  title: [GetStaticPropsConnectionTitle]
+  published_at: [GetStaticPropsConnectionPublished_at]
+}
+
+type GetStaticPropsConnectionId {
+  key: ID
+  connection: GetStaticPropsConnection
+}
+
+type GetStaticPropsConnection_id {
+  key: ID
+  connection: GetStaticPropsConnection
+}
+
+type GetStaticPropsConnectionCreatedAt {
+  key: DateTime
+  connection: GetStaticPropsConnection
+}
+
+type GetStaticPropsConnectionUpdatedAt {
+  key: DateTime
+  connection: GetStaticPropsConnection
+}
+
+type GetStaticPropsConnectionTitle {
+  key: String
+  connection: GetStaticPropsConnection
+}
+
+type GetStaticPropsConnectionPublished_at {
+  key: DateTime
+  connection: GetStaticPropsConnection
+}
+
+input GetStaticPropInput {
+  title: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editGetStaticPropInput {
+  title: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createGetStaticPropInput {
+  data: GetStaticPropInput
+}
+
+type createGetStaticPropPayload {
+  getStaticProp: GetStaticProps
+}
+
+input updateGetStaticPropInput {
+  where: InputID
+  data: editGetStaticPropInput
+}
+
+type updateGetStaticPropPayload {
+  getStaticProp: GetStaticProps
+}
+
+input deleteGetStaticPropInput {
+  where: InputID
+}
+
+type deleteGetStaticPropPayload {
+  getStaticProp: GetStaticProps
+}
+
+union JournalArticleArticleBodyDynamicZone = ComponentJournalParagraph | ComponentJournalTitle | ComponentGeneralPicture | ComponentJournalEmphasis | ComponentJournalQuote | ComponentJournalList | ComponentJournalConclusion | ComponentJournalFormPdfMaterials | ComponentJournalJournalRecommendedArticles | ComponentJournalJournalTable | ComponentJournalJournalRecommendedProgram | ComponentJournalJournalArticleRecommendedProgramsSection
+
+"""Input type for dynamic zone articleBody of JournalArticle"""
+scalar JournalArticleArticleBodyDynamicZoneInput
+
+type JournalArticle {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+  journal_category: JournalCategory
+  picture: UploadFile
+  shortDescription: String
+  articleBody: [JournalArticleArticleBodyDynamicZone]
+  published_at: DateTime
+  journal_tags(sort: String, limit: Int, start: Int, where: JSON): [JournalTag]
+  journal_authors(sort: String, limit: Int, start: Int, where: JSON): [JournalAuthors]
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  pdfMaterials(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+type JournalArticleConnection {
+  values: [JournalArticle]
+  groupBy: JournalArticleGroupBy
+  aggregate: JournalArticleAggregator
+}
+
+type JournalArticleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type JournalArticleGroupBy {
+  id: [JournalArticleConnectionId]
+  _id: [JournalArticleConnection_id]
+  createdAt: [JournalArticleConnectionCreatedAt]
+  updatedAt: [JournalArticleConnectionUpdatedAt]
+  title: [JournalArticleConnectionTitle]
+  slug: [JournalArticleConnectionSlug]
+  journal_category: [JournalArticleConnectionJournal_category]
+  picture: [JournalArticleConnectionPicture]
+  shortDescription: [JournalArticleConnectionShortDescription]
+  published_at: [JournalArticleConnectionPublished_at]
+}
+
+type JournalArticleConnectionId {
+  key: ID
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnection_id {
+  key: ID
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionCreatedAt {
+  key: DateTime
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionUpdatedAt {
+  key: DateTime
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionTitle {
+  key: String
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionSlug {
+  key: String
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionJournal_category {
+  key: ID
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionPicture {
+  key: ID
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionShortDescription {
+  key: String
+  connection: JournalArticleConnection
+}
+
+type JournalArticleConnectionPublished_at {
+  key: DateTime
+  connection: JournalArticleConnection
+}
+
+input JournalArticleInput {
+  title: String
+  slug: String
+  journal_category: ID
+  journal_tags: [ID]
+  picture: ID
+  shortDescription: String
+  articleBody: [JournalArticleArticleBodyDynamicZoneInput!]
+  journal_authors: [ID]
+  programs: [ID]
+  pdfMaterials: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editJournalArticleInput {
+  title: String
+  slug: String
+  journal_category: ID
+  journal_tags: [ID]
+  picture: ID
+  shortDescription: String
+  articleBody: [JournalArticleArticleBodyDynamicZoneInput!]
+  journal_authors: [ID]
+  programs: [ID]
+  pdfMaterials: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createJournalArticleInput {
+  data: JournalArticleInput
+}
+
+type createJournalArticlePayload {
+  journalArticle: JournalArticle
+}
+
+input updateJournalArticleInput {
+  where: InputID
+  data: editJournalArticleInput
+}
+
+type updateJournalArticlePayload {
+  journalArticle: JournalArticle
+}
+
+input deleteJournalArticleInput {
+  where: InputID
+}
+
+type deleteJournalArticlePayload {
+  journalArticle: JournalArticle
+}
+
+type JournalAuthors {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  label: String
+  firstName: String
+  lastName: String
+  portrait: UploadFile
+  published_at: DateTime
+  journal_articles(sort: String, limit: Int, start: Int, where: JSON): [JournalArticle]
+}
+
+type JournalAuthorsConnection {
+  values: [JournalAuthors]
+  groupBy: JournalAuthorsGroupBy
+  aggregate: JournalAuthorsAggregator
+}
+
+type JournalAuthorsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type JournalAuthorsGroupBy {
+  id: [JournalAuthorsConnectionId]
+  _id: [JournalAuthorsConnection_id]
+  createdAt: [JournalAuthorsConnectionCreatedAt]
+  updatedAt: [JournalAuthorsConnectionUpdatedAt]
+  label: [JournalAuthorsConnectionLabel]
+  firstName: [JournalAuthorsConnectionFirstName]
+  lastName: [JournalAuthorsConnectionLastName]
+  portrait: [JournalAuthorsConnectionPortrait]
+  published_at: [JournalAuthorsConnectionPublished_at]
+}
+
+type JournalAuthorsConnectionId {
+  key: ID
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnection_id {
+  key: ID
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionCreatedAt {
+  key: DateTime
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionUpdatedAt {
+  key: DateTime
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionLabel {
+  key: String
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionFirstName {
+  key: String
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionLastName {
+  key: String
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionPortrait {
+  key: ID
+  connection: JournalAuthorsConnection
+}
+
+type JournalAuthorsConnectionPublished_at {
+  key: DateTime
+  connection: JournalAuthorsConnection
+}
+
+input JournalAuthorInput {
+  label: String
+  firstName: String
+  lastName: String
+  portrait: ID
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editJournalAuthorInput {
+  label: String
+  firstName: String
+  lastName: String
+  portrait: ID
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createJournalAuthorInput {
+  data: JournalAuthorInput
+}
+
+type createJournalAuthorPayload {
+  journalAuthor: JournalAuthors
+}
+
+input updateJournalAuthorInput {
+  where: InputID
+  data: editJournalAuthorInput
+}
+
+type updateJournalAuthorPayload {
+  journalAuthor: JournalAuthors
+}
+
+input deleteJournalAuthorInput {
+  where: InputID
+}
+
+type deleteJournalAuthorPayload {
+  journalAuthor: JournalAuthors
+}
+
+type JournalCategory {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+  published_at: DateTime
+  journal_articles(sort: String, limit: Int, start: Int, where: JSON): [JournalArticle]
+}
+
+type JournalCategoryConnection {
+  values: [JournalCategory]
+  groupBy: JournalCategoryGroupBy
+  aggregate: JournalCategoryAggregator
+}
+
+type JournalCategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type JournalCategoryGroupBy {
+  id: [JournalCategoryConnectionId]
+  _id: [JournalCategoryConnection_id]
+  createdAt: [JournalCategoryConnectionCreatedAt]
+  updatedAt: [JournalCategoryConnectionUpdatedAt]
+  title: [JournalCategoryConnectionTitle]
+  slug: [JournalCategoryConnectionSlug]
+  published_at: [JournalCategoryConnectionPublished_at]
+}
+
+type JournalCategoryConnectionId {
+  key: ID
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnection_id {
+  key: ID
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnectionCreatedAt {
+  key: DateTime
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnectionUpdatedAt {
+  key: DateTime
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnectionTitle {
+  key: String
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnectionSlug {
+  key: String
+  connection: JournalCategoryConnection
+}
+
+type JournalCategoryConnectionPublished_at {
+  key: DateTime
+  connection: JournalCategoryConnection
+}
+
+input JournalCategoryInput {
+  title: String
+  slug: String
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editJournalCategoryInput {
+  title: String
+  slug: String
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createJournalCategoryInput {
+  data: JournalCategoryInput
+}
+
+type createJournalCategoryPayload {
+  journalCategory: JournalCategory
+}
+
+input updateJournalCategoryInput {
+  where: InputID
+  data: editJournalCategoryInput
+}
+
+type updateJournalCategoryPayload {
+  journalCategory: JournalCategory
+}
+
+input deleteJournalCategoryInput {
+  where: InputID
+}
+
+type deleteJournalCategoryPayload {
+  journalCategory: JournalCategory
+}
+
+type JournalTag {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+  description: String
+  published_at: DateTime
+  journal_articles(sort: String, limit: Int, start: Int, where: JSON): [JournalArticle]
+}
+
+type JournalTagConnection {
+  values: [JournalTag]
+  groupBy: JournalTagGroupBy
+  aggregate: JournalTagAggregator
+}
+
+type JournalTagAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type JournalTagGroupBy {
+  id: [JournalTagConnectionId]
+  _id: [JournalTagConnection_id]
+  createdAt: [JournalTagConnectionCreatedAt]
+  updatedAt: [JournalTagConnectionUpdatedAt]
+  title: [JournalTagConnectionTitle]
+  slug: [JournalTagConnectionSlug]
+  description: [JournalTagConnectionDescription]
+  published_at: [JournalTagConnectionPublished_at]
+}
+
+type JournalTagConnectionId {
+  key: ID
+  connection: JournalTagConnection
+}
+
+type JournalTagConnection_id {
+  key: ID
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionCreatedAt {
+  key: DateTime
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionUpdatedAt {
+  key: DateTime
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionTitle {
+  key: String
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionSlug {
+  key: String
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionDescription {
+  key: String
+  connection: JournalTagConnection
+}
+
+type JournalTagConnectionPublished_at {
+  key: DateTime
+  connection: JournalTagConnection
+}
+
+input JournalTagInput {
+  title: String
+  slug: String
+  description: String
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editJournalTagInput {
+  title: String
+  slug: String
+  description: String
+  journal_articles: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createJournalTagInput {
+  data: JournalTagInput
+}
+
+type createJournalTagPayload {
+  journalTag: JournalTag
+}
+
+input updateJournalTagInput {
+  where: InputID
+  data: editJournalTagInput
+}
+
+type updateJournalTagPayload {
+  journalTag: JournalTag
+}
+
+input deleteJournalTagInput {
+  where: InputID
+}
+
+type deleteJournalTagPayload {
+  journalTag: JournalTag
+}
+
+enum ENUM_PRODUCT_SUBJECTSSTICKERTYPE {
+  finalAttestation
+  fullTimeModuleInMoscow
+  practiceModulesAndFinalAttestation
+}
+
+enum ENUM_PRODUCT_ICON {
+  paperPlane
+  rocket
+  review
+  management
+  tablet
+  book
+  idea
+  graph
+}
+
+type Product {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  slug: String!
+  picture: UploadFile
+  whatWillYouLearn: [ComponentGeneralWhatWillYouLearn]
+  specializedSubjects: [ComponentGeneralWhatWillYouLearn]
+  showInMenu: Boolean
+  studyFormat: String!
+  goal: String
+  description: String
+  duration: ComponentProgramDuration
+  price: Long
+  discount: Long
+  baseSubjects: [ComponentGeneralWhatWillYouLearn]
+  subjectsStickerType: ENUM_PRODUCT_SUBJECTSSTICKERTYPE
+  programModulesCounters: ComponentProgramProgramModulesCounters
+  copyToKk: Boolean
+  study_field: StudyField
+  category: Category
+  diplomas: [ComponentProgramDiploma]
+  whoIsFor: [ComponentProgramWhoProgramIsFor]
+  specializedSubjectsAddons: ComponentProgramSpecializedSubjectsAddons
+  icon: ENUM_PRODUCT_ICON
+  locale: String
+  published_at: DateTime
+  teachers(sort: String, limit: Int, start: Int, where: JSON): [Teacher]
+  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
+  reviews(sort: String, limit: Int, start: Int, where: JSON): [Review]
+  journal_articles(sort: String, limit: Int, start: Int, where: JSON): [JournalArticle]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Product]
+}
+
+type ProductConnection {
+  values: [Product]
+  groupBy: ProductGroupBy
+  aggregate: ProductAggregator
+}
+
+type ProductAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ProductGroupBy {
+  id: [ProductConnectionId]
+  _id: [ProductConnection_id]
+  createdAt: [ProductConnectionCreatedAt]
+  updatedAt: [ProductConnectionUpdatedAt]
+  title: [ProductConnectionTitle]
+  slug: [ProductConnectionSlug]
+  picture: [ProductConnectionPicture]
+  showInMenu: [ProductConnectionShowInMenu]
+  studyFormat: [ProductConnectionStudyFormat]
+  goal: [ProductConnectionGoal]
+  description: [ProductConnectionDescription]
+  duration: [ProductConnectionDuration]
+  price: [ProductConnectionPrice]
+  discount: [ProductConnectionDiscount]
+  subjectsStickerType: [ProductConnectionSubjectsStickerType]
+  programModulesCounters: [ProductConnectionProgramModulesCounters]
+  copyToKk: [ProductConnectionCopyToKk]
+  study_field: [ProductConnectionStudy_field]
+  category: [ProductConnectionCategory]
+  specializedSubjectsAddons: [ProductConnectionSpecializedSubjectsAddons]
+  icon: [ProductConnectionIcon]
+  locale: [ProductConnectionLocale]
+  published_at: [ProductConnectionPublished_at]
+}
+
+type ProductConnectionId {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnection_id {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionCreatedAt {
+  key: DateTime
+  connection: ProductConnection
+}
+
+type ProductConnectionUpdatedAt {
+  key: DateTime
+  connection: ProductConnection
+}
+
+type ProductConnectionTitle {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionSlug {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionPicture {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionShowInMenu {
+  key: Boolean
+  connection: ProductConnection
+}
+
+type ProductConnectionStudyFormat {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionGoal {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionDescription {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionDuration {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionPrice {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionDiscount {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionSubjectsStickerType {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionProgramModulesCounters {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionCopyToKk {
+  key: Boolean
+  connection: ProductConnection
+}
+
+type ProductConnectionStudy_field {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionCategory {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionSpecializedSubjectsAddons {
+  key: ID
+  connection: ProductConnection
+}
+
+type ProductConnectionIcon {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionLocale {
+  key: String
+  connection: ProductConnection
+}
+
+type ProductConnectionPublished_at {
+  key: DateTime
+  connection: ProductConnection
+}
+
+input ProductInput {
+  title: String!
+  slug: String!
+  picture: ID
+  whatWillYouLearn: [ComponentGeneralWhatWillYouLearnInput]
+  specializedSubjects: [ComponentGeneralWhatWillYouLearnInput]
+  showInMenu: Boolean
+  studyFormat: String
+  goal: String
+  description: String
+  duration: ComponentProgramDurationInput
+  price: Long
+  discount: Long
+  baseSubjects: [ComponentGeneralWhatWillYouLearnInput]
+  subjectsStickerType: ENUM_PRODUCT_SUBJECTSSTICKERTYPE
+  programModulesCounters: ComponentProgramProgramModulesCounterInput
+  copyToKk: Boolean
+  study_field: ID
+  teachers: [ID]
+  category: ID
+  diplomas: [ComponentProgramDiplomaInput]
+  whoIsFor: [ComponentProgramWhoProgramIsForInput]
+  specializedSubjectsAddons: ComponentProgramSpecializedSubjectsAddonInput
+  questions: [ID]
+  reviews: [ID]
+  icon: ENUM_PRODUCT_ICON
+  journal_articles: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editProductInput {
+  title: String
+  slug: String
+  picture: ID
+  whatWillYouLearn: [editComponentGeneralWhatWillYouLearnInput]
+  specializedSubjects: [editComponentGeneralWhatWillYouLearnInput]
+  showInMenu: Boolean
+  studyFormat: String
+  goal: String
+  description: String
+  duration: editComponentProgramDurationInput
+  price: Long
+  discount: Long
+  baseSubjects: [editComponentGeneralWhatWillYouLearnInput]
+  subjectsStickerType: ENUM_PRODUCT_SUBJECTSSTICKERTYPE
+  programModulesCounters: editComponentProgramProgramModulesCounterInput
+  copyToKk: Boolean
+  study_field: ID
+  teachers: [ID]
+  category: ID
+  diplomas: [editComponentProgramDiplomaInput]
+  whoIsFor: [editComponentProgramWhoProgramIsForInput]
+  specializedSubjectsAddons: editComponentProgramSpecializedSubjectsAddonInput
+  questions: [ID]
+  reviews: [ID]
+  icon: ENUM_PRODUCT_ICON
+  journal_articles: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createProductInput {
+  data: ProductInput
+}
+
+type createProductPayload {
+  product: Product
+}
+
+input updateProductInput {
+  where: InputID
+  data: editProductInput
+}
+
+type updateProductPayload {
+  product: Product
+}
+
+input deleteProductInput {
+  where: InputID
+}
+
+type deleteProductPayload {
+  product: Product
+}
+
+type Question {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  question: String
+  answer: String
+  locale: String
+  published_at: DateTime
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Question]
+}
+
+type QuestionConnection {
+  values: [Question]
+  groupBy: QuestionGroupBy
+  aggregate: QuestionAggregator
+}
+
+type QuestionAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type QuestionGroupBy {
+  id: [QuestionConnectionId]
+  _id: [QuestionConnection_id]
+  createdAt: [QuestionConnectionCreatedAt]
+  updatedAt: [QuestionConnectionUpdatedAt]
+  question: [QuestionConnectionQuestion]
+  answer: [QuestionConnectionAnswer]
+  locale: [QuestionConnectionLocale]
+  published_at: [QuestionConnectionPublished_at]
+}
+
+type QuestionConnectionId {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnection_id {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnectionCreatedAt {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionConnectionUpdatedAt {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionConnectionQuestion {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionAnswer {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionLocale {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionPublished_at {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+input QuestionInput {
+  question: String
+  answer: String
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editQuestionInput {
+  question: String
+  answer: String
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createQuestionInput {
+  data: QuestionInput
+}
+
+type createQuestionPayload {
+  question: Question
+}
+
+input updateQuestionInput {
+  where: InputID
+  data: editQuestionInput
+}
+
+type updateQuestionPayload {
+  question: Question
+}
+
+input deleteQuestionInput {
+  where: InputID
+}
+
+type deleteQuestionPayload {
+  question: Question
+}
+
+type Review {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  picture: UploadFile
+  name: String
+  desc: String
+  story: String
+  locale: String
+  published_at: DateTime
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Review]
+}
+
+type ReviewConnection {
+  values: [Review]
+  groupBy: ReviewGroupBy
+  aggregate: ReviewAggregator
+}
+
+type ReviewAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ReviewGroupBy {
+  id: [ReviewConnectionId]
+  _id: [ReviewConnection_id]
+  createdAt: [ReviewConnectionCreatedAt]
+  updatedAt: [ReviewConnectionUpdatedAt]
+  picture: [ReviewConnectionPicture]
+  name: [ReviewConnectionName]
+  desc: [ReviewConnectionDesc]
+  story: [ReviewConnectionStory]
+  locale: [ReviewConnectionLocale]
+  published_at: [ReviewConnectionPublished_at]
+}
+
+type ReviewConnectionId {
+  key: ID
+  connection: ReviewConnection
+}
+
+type ReviewConnection_id {
+  key: ID
+  connection: ReviewConnection
+}
+
+type ReviewConnectionCreatedAt {
+  key: DateTime
+  connection: ReviewConnection
+}
+
+type ReviewConnectionUpdatedAt {
+  key: DateTime
+  connection: ReviewConnection
+}
+
+type ReviewConnectionPicture {
+  key: ID
+  connection: ReviewConnection
+}
+
+type ReviewConnectionName {
+  key: String
+  connection: ReviewConnection
+}
+
+type ReviewConnectionDesc {
+  key: String
+  connection: ReviewConnection
+}
+
+type ReviewConnectionStory {
+  key: String
+  connection: ReviewConnection
+}
+
+type ReviewConnectionLocale {
+  key: String
+  connection: ReviewConnection
+}
+
+type ReviewConnectionPublished_at {
+  key: DateTime
+  connection: ReviewConnection
+}
+
+input ReviewInput {
+  picture: ID
+  name: String
+  desc: String
+  story: String
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editReviewInput {
+  picture: ID
+  name: String
+  desc: String
+  story: String
+  programs: [ID]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createReviewInput {
+  data: ReviewInput
+}
+
+type createReviewPayload {
+  review: Review
+}
+
+input updateReviewInput {
+  where: InputID
+  data: editReviewInput
+}
+
+type updateReviewPayload {
+  review: Review
+}
+
+input deleteReviewInput {
+  where: InputID
+}
+
+type deleteReviewPayload {
+  review: Review
+}
+
+type StudyField {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  description: String!
+  copyToKk: Boolean!
+  slug: String
+  locale: String
+  published_at: DateTime
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [StudyField]
+}
+
+type StudyFieldConnection {
+  values: [StudyField]
+  groupBy: StudyFieldGroupBy
+  aggregate: StudyFieldAggregator
+}
+
+type StudyFieldAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type StudyFieldGroupBy {
+  id: [StudyFieldConnectionId]
+  _id: [StudyFieldConnection_id]
+  createdAt: [StudyFieldConnectionCreatedAt]
+  updatedAt: [StudyFieldConnectionUpdatedAt]
+  name: [StudyFieldConnectionName]
+  description: [StudyFieldConnectionDescription]
+  copyToKk: [StudyFieldConnectionCopyToKk]
+  slug: [StudyFieldConnectionSlug]
+  locale: [StudyFieldConnectionLocale]
+  published_at: [StudyFieldConnectionPublished_at]
+}
+
+type StudyFieldConnectionId {
+  key: ID
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnection_id {
+  key: ID
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionCreatedAt {
+  key: DateTime
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionUpdatedAt {
+  key: DateTime
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionName {
+  key: String
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionDescription {
+  key: String
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionCopyToKk {
+  key: Boolean
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionSlug {
+  key: String
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionLocale {
+  key: String
+  connection: StudyFieldConnection
+}
+
+type StudyFieldConnectionPublished_at {
+  key: DateTime
+  connection: StudyFieldConnection
+}
+
+input StudyFieldInput {
+  name: String!
+  description: String!
+  copyToKk: Boolean
+  programs: [ID]
+  slug: String
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editStudyFieldInput {
+  name: String
+  description: String
+  copyToKk: Boolean
+  programs: [ID]
+  slug: String
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createStudyFieldInput {
+  data: StudyFieldInput
+}
+
+type createStudyFieldPayload {
+  studyField: StudyField
+}
+
+input updateStudyFieldInput {
+  where: InputID
+  data: editStudyFieldInput
+}
+
+type updateStudyFieldPayload {
+  studyField: StudyField
+}
+
+input deleteStudyFieldInput {
+  where: InputID
+}
+
+type deleteStudyFieldPayload {
+  studyField: StudyField
+}
+
+type Teacher {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  description: String!
+  slug: String
+  portrait: UploadFile
+  copyToKk: Boolean!
+  descriptionItems: [ComponentGeneralTeacherDescriptionItems]
+  locale: String
+  published_at: DateTime
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Teacher]
+}
+
+type TeacherConnection {
+  values: [Teacher]
+  groupBy: TeacherGroupBy
+  aggregate: TeacherAggregator
+}
+
+type TeacherAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TeacherGroupBy {
+  id: [TeacherConnectionId]
+  _id: [TeacherConnection_id]
+  createdAt: [TeacherConnectionCreatedAt]
+  updatedAt: [TeacherConnectionUpdatedAt]
+  name: [TeacherConnectionName]
+  description: [TeacherConnectionDescription]
+  slug: [TeacherConnectionSlug]
+  portrait: [TeacherConnectionPortrait]
+  copyToKk: [TeacherConnectionCopyToKk]
+  locale: [TeacherConnectionLocale]
+  published_at: [TeacherConnectionPublished_at]
+}
+
+type TeacherConnectionId {
+  key: ID
+  connection: TeacherConnection
+}
+
+type TeacherConnection_id {
+  key: ID
+  connection: TeacherConnection
+}
+
+type TeacherConnectionCreatedAt {
+  key: DateTime
+  connection: TeacherConnection
+}
+
+type TeacherConnectionUpdatedAt {
+  key: DateTime
+  connection: TeacherConnection
+}
+
+type TeacherConnectionName {
+  key: String
+  connection: TeacherConnection
+}
+
+type TeacherConnectionDescription {
+  key: String
+  connection: TeacherConnection
+}
+
+type TeacherConnectionSlug {
+  key: String
+  connection: TeacherConnection
+}
+
+type TeacherConnectionPortrait {
+  key: ID
+  connection: TeacherConnection
+}
+
+type TeacherConnectionCopyToKk {
+  key: Boolean
+  connection: TeacherConnection
+}
+
+type TeacherConnectionLocale {
+  key: String
+  connection: TeacherConnection
+}
+
+type TeacherConnectionPublished_at {
+  key: DateTime
+  connection: TeacherConnection
+}
+
+input TeacherInput {
+  name: String!
+  description: String!
+  slug: String
+  portrait: ID
+  programs: [ID]
+  copyToKk: Boolean
+  descriptionItems: [ComponentGeneralTeacherDescriptionItemInput]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTeacherInput {
+  name: String
+  description: String
+  slug: String
+  portrait: ID
+  programs: [ID]
+  copyToKk: Boolean
+  descriptionItems: [editComponentGeneralTeacherDescriptionItemInput]
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTeacherInput {
+  data: TeacherInput
+}
+
+type createTeacherPayload {
+  teacher: Teacher
+}
+
+input updateTeacherInput {
+  where: InputID
+  data: editTeacherInput
+}
+
+type updateTeacherPayload {
+  teacher: Teacher
+}
+
+input deleteTeacherInput {
+  where: InputID
+}
+
+type deleteTeacherPayload {
+  teacher: Teacher
+}
+
+type Webinars {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  date: DateTime
+  title: String
+  name: String
+  picture: UploadFile
+  duration: Time
+  locale: String
+  published_at: DateTime
+  localizations(sort: String, limit: Int, start: Int, where: JSON): [Webinars]
+}
+
+type WebinarsConnection {
+  values: [Webinars]
+  groupBy: WebinarsGroupBy
+  aggregate: WebinarsAggregator
+}
+
+type WebinarsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type WebinarsGroupBy {
+  id: [WebinarsConnectionId]
+  _id: [WebinarsConnection_id]
+  createdAt: [WebinarsConnectionCreatedAt]
+  updatedAt: [WebinarsConnectionUpdatedAt]
+  date: [WebinarsConnectionDate]
+  title: [WebinarsConnectionTitle]
+  name: [WebinarsConnectionName]
+  picture: [WebinarsConnectionPicture]
+  duration: [WebinarsConnectionDuration]
+  locale: [WebinarsConnectionLocale]
+  published_at: [WebinarsConnectionPublished_at]
+}
+
+type WebinarsConnectionId {
+  key: ID
+  connection: WebinarsConnection
+}
+
+type WebinarsConnection_id {
+  key: ID
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionCreatedAt {
+  key: DateTime
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionUpdatedAt {
+  key: DateTime
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionDate {
+  key: DateTime
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionTitle {
+  key: String
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionName {
+  key: String
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionPicture {
+  key: ID
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionDuration {
+  key: ID
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionLocale {
+  key: String
+  connection: WebinarsConnection
+}
+
+type WebinarsConnectionPublished_at {
+  key: DateTime
+  connection: WebinarsConnection
+}
+
+input WebinarInput {
+  date: DateTime
+  title: String
+  name: String
+  picture: ID
+  duration: Time
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editWebinarInput {
+  date: DateTime
+  title: String
+  name: String
+  picture: ID
+  duration: Time
+  localizations: [ID]
+  locale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createWebinarInput {
+  data: WebinarInput
+}
+
+type createWebinarPayload {
+  webinar: Webinars
+}
+
+input updateWebinarInput {
+  where: InputID
+  data: editWebinarInput
+}
+
+type updateWebinarPayload {
+  webinar: Webinars
+}
+
+input deleteWebinarInput {
+  where: InputID
+}
+
+type deleteWebinarPayload {
+  webinar: Webinars
+}
+
+type I18NLocale {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  code: String
+}
+
+input LocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editLocaleInput {
+  name: String
+  code: String
+  created_by: ID
+  updated_by: ID
+}
+
+type UploadFile {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  _id: [UploadFileConnection_id]
+  createdAt: [UploadFileConnectionCreatedAt]
+  updatedAt: [UploadFileConnectionUpdatedAt]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnection_id {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  _id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  _id: [UsersPermissionsRoleConnection_id]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnection_id {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  _id: [UsersPermissionsUserConnection_id]
+  createdAt: [UsersPermissionsUserConnectionCreatedAt]
+  updatedAt: [UsersPermissionsUserConnectionUpdatedAt]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnection_id {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentGeneralListItemWithTitleBody {
+  id: ID!
+  _id: ID!
+  title: String
+  body: String
+}
+
+input ComponentGeneralListItemWithTitleBodyInput {
+  title: String
+  body: String
+}
+
+input editComponentGeneralListItemWithTitleBodyInput {
+  id: ID
+  title: String
+  body: String
+}
+
+type ComponentGeneralPicture {
+  id: ID!
+  _id: ID!
+  title: String
+  picture: UploadFile
+}
+
+input ComponentGeneralPictureInput {
+  title: String
+  picture: ID
+}
+
+input editComponentGeneralPictureInput {
+  id: ID
+  title: String
+  picture: ID
+}
+
+type ComponentGeneralTeacherDescriptionItems {
+  id: ID!
+  _id: ID!
+  item: String
+}
+
+input ComponentGeneralTeacherDescriptionItemInput {
+  item: String
+}
+
+input editComponentGeneralTeacherDescriptionItemInput {
+  id: ID
+  item: String
+}
+
+type ComponentGeneralText {
+  id: ID!
+  _id: ID!
+  title: String
+  text: String
+  isHighlighted: Boolean
+  isLarger: Boolean
+}
+
+input ComponentGeneralTextInput {
+  title: String
+  text: String
+  isHighlighted: Boolean
+  isLarger: Boolean
+}
+
+input editComponentGeneralTextInput {
+  id: ID
+  title: String
+  text: String
+  isHighlighted: Boolean
+  isLarger: Boolean
+}
+
+type ComponentGeneralTitle {
+  id: ID!
+  _id: ID!
+  text: String
+  isHighlighted: Boolean
+}
+
+input ComponentGeneralTitleInput {
+  text: String
+  isHighlighted: Boolean
+}
+
+input editComponentGeneralTitleInput {
+  id: ID
+  text: String
+  isHighlighted: Boolean
+}
+
+type ComponentGeneralWhatWillYouLearn {
+  id: ID!
+  _id: ID!
+  string: String
+  title: String
+}
+
+input ComponentGeneralWhatWillYouLearnInput {
+  string: String
+  title: String
+}
+
+input editComponentGeneralWhatWillYouLearnInput {
+  id: ID
+  string: String
+  title: String
+}
+
+type ComponentGeneralWordCases {
+  id: ID!
+  _id: ID!
+  singular: String!
+  plural: String!
+}
+
+input ComponentGeneralWordCaseInput {
+  singular: String!
+  plural: String!
+}
+
+input editComponentGeneralWordCaseInput {
+  id: ID
+  singular: String
+  plural: String
+}
+
+type ComponentJournalConclusion {
+  id: ID!
+  _id: ID!
+  item: [ComponentGeneralListItemWithTitleBody]
+  title: String
+}
+
+input ComponentJournalConclusionInput {
+  item: [ComponentGeneralListItemWithTitleBodyInput]
+  title: String
+}
+
+input editComponentJournalConclusionInput {
+  id: ID
+  item: [editComponentGeneralListItemWithTitleBodyInput]
+  title: String
+}
+
+type ComponentJournalEmphasis {
+  id: ID!
+  _id: ID!
+  title: String
+  emphasisBody: String
+}
+
+input ComponentJournalEmphasisInput {
+  title: String
+  emphasisBody: String
+}
+
+input editComponentJournalEmphasisInput {
+  id: ID
+  title: String
+  emphasisBody: String
+}
+
+type ComponentJournalFormPdfMaterials {
+  id: ID!
+  _id: ID!
+  title: String
+}
+
+input ComponentJournalFormPdfMaterialInput {
+  title: String
+}
+
+input editComponentJournalFormPdfMaterialInput {
+  id: ID
+  title: String
+}
+
+type ComponentJournalJournalArticleRecommendedProgramsSection {
+  id: ID!
+  _id: ID!
+  title: String
+  sectionTitle: [ComponentGeneralTitle]
+  btnVal: String
+  shortTextAtTheBottom: [ComponentGeneralText]
+  programs(sort: String, limit: Int, start: Int, where: JSON): [Product]
+}
+
+input ComponentJournalJournalArticleRecommendedProgramsSectionInput {
+  programs: [ID]
+  title: String
+  sectionTitle: [ComponentGeneralTitleInput]
+  btnVal: String
+  shortTextAtTheBottom: [ComponentGeneralTextInput]
+}
+
+input editComponentJournalJournalArticleRecommendedProgramsSectionInput {
+  id: ID
+  programs: [ID]
+  title: String
+  sectionTitle: [editComponentGeneralTitleInput]
+  btnVal: String
+  shortTextAtTheBottom: [editComponentGeneralTextInput]
+}
+
+type ComponentJournalJournalAuthor {
+  id: ID!
+  _id: ID!
+  label: String
+  firstName: String
+  lastName: String
+  portrait: UploadFile
+}
+
+input ComponentJournalJournalAuthorInput {
+  label: String
+  firstName: String
+  lastName: String
+  portrait: ID
+}
+
+input editComponentJournalJournalAuthorInput {
+  id: ID
+  label: String
+  firstName: String
+  lastName: String
+  portrait: ID
+}
+
+type ComponentJournalJournalRecommendedArticles {
+  id: ID!
+  _id: ID!
+  title: String
+  journal_articles(sort: String, limit: Int, start: Int, where: JSON): [JournalArticle]
+}
+
+input ComponentJournalJournalRecommendedArticleInput {
+  title: String
+  journal_articles: [ID]
+}
+
+input editComponentJournalJournalRecommendedArticleInput {
+  id: ID
+  title: String
+  journal_articles: [ID]
+}
+
+type ComponentJournalJournalRecommendedProgram {
+  id: ID!
+  _id: ID!
+  program: Product
+  title: String
+  btnValue: String
+}
+
+input ComponentJournalJournalRecommendedProgramInput {
+  program: ID
+  title: String
+  btnValue: String
+}
+
+input editComponentJournalJournalRecommendedProgramInput {
+  id: ID
+  program: ID
+  title: String
+  btnValue: String
+}
+
+type ComponentJournalJournalTable {
+  id: ID!
+  _id: ID!
+  htmlTable: UploadFile
+  title: String
+}
+
+input ComponentJournalJournalTableInput {
+  htmlTable: ID
+  title: String
+}
+
+input editComponentJournalJournalTableInput {
+  id: ID
+  htmlTable: ID
+  title: String
+}
+
+type ComponentJournalListItem {
+  id: ID!
+  _id: ID!
+  title: String
+  body: String
+}
+
+input ComponentJournalListItemInput {
+  title: String
+  body: String
+}
+
+input editComponentJournalListItemInput {
+  id: ID
+  title: String
+  body: String
+}
+
+type ComponentJournalList {
+  id: ID!
+  _id: ID!
+  title: String
+  listItem: [ComponentJournalListItem]
+}
+
+input ComponentJournalListInput {
+  title: String
+  listItem: [ComponentJournalListItemInput]
+}
+
+input editComponentJournalListInput {
+  id: ID
+  title: String
+  listItem: [editComponentJournalListItemInput]
+}
+
+type ComponentJournalParagraph {
+  id: ID!
+  _id: ID!
+  title: String
+  paragraphBody: [ComponentGeneralText]
+}
+
+input ComponentJournalParagraphInput {
+  title: String
+  paragraphBody: [ComponentGeneralTextInput]
+}
+
+input editComponentJournalParagraphInput {
+  id: ID
+  title: String
+  paragraphBody: [editComponentGeneralTextInput]
+}
+
+type ComponentJournalQuote {
+  id: ID!
+  _id: ID!
+  title: String
+  body: String
+  authorName: String
+  athorPosition: String
+  portrait: UploadFile
+}
+
+input ComponentJournalQuoteInput {
+  title: String
+  body: String
+  authorName: String
+  athorPosition: String
+  portrait: ID
+}
+
+input editComponentJournalQuoteInput {
+  id: ID
+  title: String
+  body: String
+  authorName: String
+  athorPosition: String
+  portrait: ID
+}
+
+type ComponentJournalTitle {
+  id: ID!
+  _id: ID!
+  title: String
+  titleBody: [ComponentGeneralTitle]
+}
+
+input ComponentJournalTitleInput {
+  title: String
+  titleBody: [ComponentGeneralTitleInput]
+}
+
+input editComponentJournalTitleInput {
+  id: ID
+  title: String
+  titleBody: [editComponentGeneralTitleInput]
+}
+
+type ComponentProgramDiploma {
+  id: ID!
+  _id: ID!
+  name: String
+  diploma(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+input ComponentProgramDiplomaInput {
+  diploma: [ID]
+  name: String
+}
+
+input editComponentProgramDiplomaInput {
+  id: ID
+  diploma: [ID]
+  name: String
+}
+
+type ComponentProgramDuration {
+  id: ID!
+  _id: ID!
+  studyHours: Long
+  minStudyMonths: Long
+}
+
+input ComponentProgramDurationInput {
+  studyHours: Long
+  minStudyMonths: Long
+}
+
+input editComponentProgramDurationInput {
+  id: ID
+  studyHours: Long
+  minStudyMonths: Long
+}
+
+enum ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_LEFTCOUNTER {
+  specializedlAcademicDisciplines
+  academicDisciplines
+  generalAcademicDisciplines
+}
+
+enum ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_RIGHTCOUNTER {
+  icon
+  specializedlAcademicDisciplines
+  practiceAndExam
+}
+
+type ComponentProgramProgramModulesCounters {
+  id: ID!
+  _id: ID!
+  leftCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_LEFTCOUNTER
+  rightCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_RIGHTCOUNTER
+}
+
+input ComponentProgramProgramModulesCounterInput {
+  leftCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_LEFTCOUNTER
+  rightCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_RIGHTCOUNTER
+}
+
+input editComponentProgramProgramModulesCounterInput {
+  id: ID
+  leftCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_LEFTCOUNTER
+  rightCounter: ENUM_COMPONENTPROGRAMPROGRAMMODULESCOUNTERS_RIGHTCOUNTER
+}
+
+type ComponentProgramSpecializedSubjectsAddons {
+  id: ID!
+  _id: ID!
+  Practice: Boolean
+  OfflineModule: Boolean
+  diplomaProtection: Boolean
+}
+
+input ComponentProgramSpecializedSubjectsAddonInput {
+  Practice: Boolean
+  OfflineModule: Boolean
+  diplomaProtection: Boolean
+}
+
+input editComponentProgramSpecializedSubjectsAddonInput {
+  id: ID
+  Practice: Boolean
+  OfflineModule: Boolean
+  diplomaProtection: Boolean
+}
+
+type ComponentProgramWhoProgramIsFor {
+  id: ID!
+  _id: ID!
+  name: String
+  description: String
+}
+
+input ComponentProgramWhoProgramIsForInput {
+  name: String
+  description: String
+}
+
+input editComponentProgramWhoProgramIsForInput {
+  id: ID
+  name: String
+  description: String
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnection_id | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionType | CategoryConnectionSlug | CategoryConnectionCopyToKk | CategoryConnectionLabelCases | CategoryConnectionDescription | CategoryConnectionLocale | CategoryConnectionPublished_at | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | GetStaticPaths | GetStaticPathsConnection | GetStaticPathsAggregator | GetStaticPathsGroupBy | GetStaticPathsConnectionId | GetStaticPathsConnection_id | GetStaticPathsConnectionCreatedAt | GetStaticPathsConnectionUpdatedAt | GetStaticPathsConnectionPath | GetStaticPathsConnectionPublished_at | createGetStaticPathPayload | updateGetStaticPathPayload | deleteGetStaticPathPayload | GetStaticProps | GetStaticPropsConnection | GetStaticPropsAggregator | GetStaticPropsGroupBy | GetStaticPropsConnectionId | GetStaticPropsConnection_id | GetStaticPropsConnectionCreatedAt | GetStaticPropsConnectionUpdatedAt | GetStaticPropsConnectionTitle | GetStaticPropsConnectionPublished_at | createGetStaticPropPayload | updateGetStaticPropPayload | deleteGetStaticPropPayload | JournalArticle | JournalArticleConnection | JournalArticleAggregator | JournalArticleGroupBy | JournalArticleConnectionId | JournalArticleConnection_id | JournalArticleConnectionCreatedAt | JournalArticleConnectionUpdatedAt | JournalArticleConnectionTitle | JournalArticleConnectionSlug | JournalArticleConnectionJournal_category | JournalArticleConnectionPicture | JournalArticleConnectionShortDescription | JournalArticleConnectionPublished_at | createJournalArticlePayload | updateJournalArticlePayload | deleteJournalArticlePayload | JournalAuthors | JournalAuthorsConnection | JournalAuthorsAggregator | JournalAuthorsGroupBy | JournalAuthorsConnectionId | JournalAuthorsConnection_id | JournalAuthorsConnectionCreatedAt | JournalAuthorsConnectionUpdatedAt | JournalAuthorsConnectionLabel | JournalAuthorsConnectionFirstName | JournalAuthorsConnectionLastName | JournalAuthorsConnectionPortrait | JournalAuthorsConnectionPublished_at | createJournalAuthorPayload | updateJournalAuthorPayload | deleteJournalAuthorPayload | JournalCategory | JournalCategoryConnection | JournalCategoryAggregator | JournalCategoryGroupBy | JournalCategoryConnectionId | JournalCategoryConnection_id | JournalCategoryConnectionCreatedAt | JournalCategoryConnectionUpdatedAt | JournalCategoryConnectionTitle | JournalCategoryConnectionSlug | JournalCategoryConnectionPublished_at | createJournalCategoryPayload | updateJournalCategoryPayload | deleteJournalCategoryPayload | JournalTag | JournalTagConnection | JournalTagAggregator | JournalTagGroupBy | JournalTagConnectionId | JournalTagConnection_id | JournalTagConnectionCreatedAt | JournalTagConnectionUpdatedAt | JournalTagConnectionTitle | JournalTagConnectionSlug | JournalTagConnectionDescription | JournalTagConnectionPublished_at | createJournalTagPayload | updateJournalTagPayload | deleteJournalTagPayload | Product | ProductConnection | ProductAggregator | ProductGroupBy | ProductConnectionId | ProductConnection_id | ProductConnectionCreatedAt | ProductConnectionUpdatedAt | ProductConnectionTitle | ProductConnectionSlug | ProductConnectionPicture | ProductConnectionShowInMenu | ProductConnectionStudyFormat | ProductConnectionGoal | ProductConnectionDescription | ProductConnectionDuration | ProductConnectionPrice | ProductConnectionDiscount | ProductConnectionSubjectsStickerType | ProductConnectionProgramModulesCounters | ProductConnectionCopyToKk | ProductConnectionStudy_field | ProductConnectionCategory | ProductConnectionSpecializedSubjectsAddons | ProductConnectionIcon | ProductConnectionLocale | ProductConnectionPublished_at | createProductPayload | updateProductPayload | deleteProductPayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnection_id | QuestionConnectionCreatedAt | QuestionConnectionUpdatedAt | QuestionConnectionQuestion | QuestionConnectionAnswer | QuestionConnectionLocale | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | Review | ReviewConnection | ReviewAggregator | ReviewGroupBy | ReviewConnectionId | ReviewConnection_id | ReviewConnectionCreatedAt | ReviewConnectionUpdatedAt | ReviewConnectionPicture | ReviewConnectionName | ReviewConnectionDesc | ReviewConnectionStory | ReviewConnectionLocale | ReviewConnectionPublished_at | createReviewPayload | updateReviewPayload | deleteReviewPayload | StudyField | StudyFieldConnection | StudyFieldAggregator | StudyFieldGroupBy | StudyFieldConnectionId | StudyFieldConnection_id | StudyFieldConnectionCreatedAt | StudyFieldConnectionUpdatedAt | StudyFieldConnectionName | StudyFieldConnectionDescription | StudyFieldConnectionCopyToKk | StudyFieldConnectionSlug | StudyFieldConnectionLocale | StudyFieldConnectionPublished_at | createStudyFieldPayload | updateStudyFieldPayload | deleteStudyFieldPayload | Teacher | TeacherConnection | TeacherAggregator | TeacherGroupBy | TeacherConnectionId | TeacherConnection_id | TeacherConnectionCreatedAt | TeacherConnectionUpdatedAt | TeacherConnectionName | TeacherConnectionDescription | TeacherConnectionSlug | TeacherConnectionPortrait | TeacherConnectionCopyToKk | TeacherConnectionLocale | TeacherConnectionPublished_at | createTeacherPayload | updateTeacherPayload | deleteTeacherPayload | Webinars | WebinarsConnection | WebinarsAggregator | WebinarsGroupBy | WebinarsConnectionId | WebinarsConnection_id | WebinarsConnectionCreatedAt | WebinarsConnectionUpdatedAt | WebinarsConnectionDate | WebinarsConnectionTitle | WebinarsConnectionName | WebinarsConnectionPicture | WebinarsConnectionDuration | WebinarsConnectionLocale | WebinarsConnectionPublished_at | createWebinarPayload | updateWebinarPayload | deleteWebinarPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentGeneralListItemWithTitleBody | ComponentGeneralPicture | ComponentGeneralTeacherDescriptionItems | ComponentGeneralText | ComponentGeneralTitle | ComponentGeneralWhatWillYouLearn | ComponentGeneralWordCases | ComponentJournalConclusion | ComponentJournalEmphasis | ComponentJournalFormPdfMaterials | ComponentJournalJournalArticleRecommendedProgramsSection | ComponentJournalJournalAuthor | ComponentJournalJournalRecommendedArticles | ComponentJournalJournalRecommendedProgram | ComponentJournalJournalTable | ComponentJournalListItem | ComponentJournalList | ComponentJournalParagraph | ComponentJournalQuote | ComponentJournalTitle | ComponentProgramDiploma | ComponentProgramDuration | ComponentProgramProgramModulesCounters | ComponentProgramSpecializedSubjectsAddons | ComponentProgramWhoProgramIsFor
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  category(id: ID!, publicationState: PublicationState): Category
+  categories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Category]
+  categoriesConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): CategoryConnection
+  getStaticPath(id: ID!, publicationState: PublicationState): GetStaticPaths
+  getStaticPaths(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GetStaticPaths]
+  getStaticPathsConnection(sort: String, limit: Int, start: Int, where: JSON): GetStaticPathsConnection
+  getStaticProp(id: ID!, publicationState: PublicationState): GetStaticProps
+  getStaticProps(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GetStaticProps]
+  getStaticPropsConnection(sort: String, limit: Int, start: Int, where: JSON): GetStaticPropsConnection
+  journalArticle(id: ID!, publicationState: PublicationState): JournalArticle
+  journalArticles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [JournalArticle]
+  journalArticlesConnection(sort: String, limit: Int, start: Int, where: JSON): JournalArticleConnection
+  journalAuthor(id: ID!, publicationState: PublicationState): JournalAuthors
+  journalAuthors(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [JournalAuthors]
+  journalAuthorsConnection(sort: String, limit: Int, start: Int, where: JSON): JournalAuthorsConnection
+  journalCategory(id: ID!, publicationState: PublicationState): JournalCategory
+  journalCategories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [JournalCategory]
+  journalCategoriesConnection(sort: String, limit: Int, start: Int, where: JSON): JournalCategoryConnection
+  journalTag(id: ID!, publicationState: PublicationState): JournalTag
+  journalTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [JournalTag]
+  journalTagsConnection(sort: String, limit: Int, start: Int, where: JSON): JournalTagConnection
+  product(id: ID!, publicationState: PublicationState): Product
+  products(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Product]
+  productsConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): ProductConnection
+  question(id: ID!, publicationState: PublicationState): Question
+  questions(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Question]
+  questionsConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): QuestionConnection
+  review(id: ID!, publicationState: PublicationState): Review
+  reviews(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Review]
+  reviewsConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): ReviewConnection
+  studyField(id: ID!, publicationState: PublicationState): StudyField
+  studyFields(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [StudyField]
+  studyFieldsConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): StudyFieldConnection
+  teacher(id: ID!, publicationState: PublicationState): Teacher
+  teachers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Teacher]
+  teachersConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): TeacherConnection
+  webinar(id: ID!, publicationState: PublicationState): Webinars
+  webinars(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState, locale: String): [Webinars]
+  webinarsConnection(sort: String, limit: Int, start: Int, where: JSON, locale: String): WebinarsConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createCategory(input: createCategoryInput): createCategoryPayload
+  updateCategory(input: updateCategoryInput): updateCategoryPayload
+  deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
+  createGetStaticPath(input: createGetStaticPathInput): createGetStaticPathPayload
+  updateGetStaticPath(input: updateGetStaticPathInput): updateGetStaticPathPayload
+  deleteGetStaticPath(input: deleteGetStaticPathInput): deleteGetStaticPathPayload
+  createGetStaticProp(input: createGetStaticPropInput): createGetStaticPropPayload
+  updateGetStaticProp(input: updateGetStaticPropInput): updateGetStaticPropPayload
+  deleteGetStaticProp(input: deleteGetStaticPropInput): deleteGetStaticPropPayload
+  createJournalArticle(input: createJournalArticleInput): createJournalArticlePayload
+  updateJournalArticle(input: updateJournalArticleInput): updateJournalArticlePayload
+  deleteJournalArticle(input: deleteJournalArticleInput): deleteJournalArticlePayload
+  createJournalAuthor(input: createJournalAuthorInput): createJournalAuthorPayload
+  updateJournalAuthor(input: updateJournalAuthorInput): updateJournalAuthorPayload
+  deleteJournalAuthor(input: deleteJournalAuthorInput): deleteJournalAuthorPayload
+  createJournalCategory(input: createJournalCategoryInput): createJournalCategoryPayload
+  updateJournalCategory(input: updateJournalCategoryInput): updateJournalCategoryPayload
+  deleteJournalCategory(input: deleteJournalCategoryInput): deleteJournalCategoryPayload
+  createJournalTag(input: createJournalTagInput): createJournalTagPayload
+  updateJournalTag(input: updateJournalTagInput): updateJournalTagPayload
+  deleteJournalTag(input: deleteJournalTagInput): deleteJournalTagPayload
+  createProduct(input: createProductInput): createProductPayload
+  updateProduct(input: updateProductInput): updateProductPayload
+  deleteProduct(input: deleteProductInput): deleteProductPayload
+  createQuestion(input: createQuestionInput): createQuestionPayload
+  updateQuestion(input: updateQuestionInput): updateQuestionPayload
+  deleteQuestion(input: deleteQuestionInput): deleteQuestionPayload
+  createReview(input: createReviewInput): createReviewPayload
+  updateReview(input: updateReviewInput): updateReviewPayload
+  deleteReview(input: deleteReviewInput): deleteReviewPayload
+  createStudyField(input: createStudyFieldInput): createStudyFieldPayload
+  updateStudyField(input: updateStudyFieldInput): updateStudyFieldPayload
+  deleteStudyField(input: deleteStudyFieldInput): deleteStudyFieldPayload
+  createTeacher(input: createTeacherInput): createTeacherPayload
+  updateTeacher(input: updateTeacherInput): updateTeacherPayload
+  deleteTeacher(input: deleteTeacherInput): deleteTeacherPayload
+  createWebinar(input: createWebinarInput): createWebinarPayload
+  updateWebinar(input: updateWebinarInput): updateWebinarPayload
+  deleteWebinar(input: deleteWebinarInput): deleteWebinarPayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  createCategoryLocalization(input: updateCategoryInput!): Category!
+  createProductLocalization(input: updateProductInput!): Product!
+  createQuestionLocalization(input: updateQuestionInput!): Question!
+  createReviewLocalization(input: updateReviewInput!): Review!
+  createStudyFieldLocalization(input: updateStudyFieldInput!): StudyField!
+  createTeacherLocalization(input: updateTeacherInput!): Teacher!
+  createWebinarLocalization(input: updateWebinarInput!): Webinars!
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
